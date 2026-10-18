@@ -1,0 +1,438 @@
+@font-face {
+  font-family: "Chalk";
+  src: url("chalk.ttf") format("truetype");
+  font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+:root {
+  --ink: #252824;
+  --paper: #f6f2e8;
+  --chalk: #f8f7ef;
+  --line: #c9c1b0;
+  --accent: #ae2b03;
+  --muted: #64675f;
+  --section-gap: clamp(4rem, 8vw, 6.5rem);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background: var(--paper);
+  font-family: ui-rounded, "Avenir Next", "Trebuchet MS", Arial, sans-serif;
+  line-height: 1.45;
+}
+
+h1,
+h2 {
+  font-family: "Chalk", ui-rounded, "Avenir Next", "Trebuchet MS", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--accent);
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+#hero {
+  display: grid;
+  min-height: min(76vh, 52rem);
+  place-content: center;
+  padding: 5rem 1.5rem;
+  position: relative;
+  isolation: isolate;
+  color: var(--chalk);
+  text-align: center;
+  background: #20221f url("chalk-background.jpg") center / cover no-repeat;
+}
+
+#hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: rgba(10, 12, 10, 0.22);
+}
+
+#hero h1 {
+  max-width: 12ch;
+  font-size: clamp(4.2rem, 13vw, 10rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: 0.015em;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.15);
+  animation: chalk-write 1.9s cubic-bezier(0.22, 0.61, 0.36, 1) 150ms both;
+}
+
+#hero h3 {
+  margin-top: 1.25rem;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: 0.035em;
+  animation: chalk-fade-in 600ms ease-out 1.85s both;
+}
+
+@keyframes chalk-write {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    filter: blur(2px);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+  }
+}
+
+@keyframes chalk-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#products,
+#donate,
+#faq,
+#footer {
+  width: min(100% - 3rem, 70rem);
+  margin-inline: auto;
+}
+
+#products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  padding-block: var(--section-gap);
+}
+
+#products > div {
+  --tilt: 0deg;
+  min-height: 15rem;
+  padding: 2rem 1.75rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(var(--tilt));
+  transition:
+    opacity 500ms ease var(--reveal-delay, 0ms),
+    transform 500ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--reveal-delay, 0ms),
+    box-shadow 180ms ease;
+}
+
+#products > div:nth-child(2) {
+  --tilt: -0.6deg;
+}
+
+#products > div:nth-child(3) {
+  --tilt: 0.45deg;
+}
+
+#products > div:hover {
+  box-shadow: 4px 5px 0 rgba(37, 40, 36, 0.16);
+}
+
+#products > div:nth-child(2):hover {
+  transform: rotate(var(--tilt)) translateY(-4px);
+}
+
+#products > div:nth-child(3):hover {
+  transform: rotate(var(--tilt)) translateY(-4px);
+}
+
+#products > div:first-child:hover {
+  transform: rotate(var(--tilt)) translateY(-4px);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+#products h2 a {
+  text-decoration: none;
+}
+
+#products p {
+  margin-top: 1.35rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+#pricing {
+  width: min(100% - 3rem, 62rem);
+  margin: 0 auto var(--section-gap);
+}
+
+#pricing h2 {
+  text-align: center;
+}
+
+.pricing-intro {
+  margin: 0.75rem auto 2.5rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.pricing-table-wrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+#pricing table {
+  width: 100%;
+  min-width: 35rem;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+#pricing th,
+#pricing td {
+  padding: 1.1rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+#pricing thead th {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#pricing tbody th {
+  font-weight: 600;
+}
+
+#pricing tbody td:nth-child(2) {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(174, 43, 3, 0.55);
+  text-decoration-thickness: 1px;
+}
+
+#pricing tbody td:last-child,
+#pricing thead th:last-child {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+#pricing tbody tr:last-child th,
+#pricing tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+#donate {
+  margin-bottom: var(--section-gap);
+  padding: clamp(3rem, 7vw, 5rem);
+  color: var(--chalk);
+  text-align: center;
+  background: var(--ink);
+}
+
+#donate h2 {
+  color: #fffef6;
+}
+
+#donate p {
+  max-width: 35rem;
+  margin: 1.25rem auto 2rem;
+  font-size: 1.08rem;
+}
+
+#donate a {
+  display: inline-grid;
+  min-width: 10rem;
+  min-height: 2.8rem;
+  place-items: center;
+  padding: 0.45rem 1.25rem;
+  border: 1px solid var(--chalk);
+  color: var(--ink);
+  background: var(--chalk);
+  text-decoration: none;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+#donate a::before {
+  content: "donate";
+}
+
+#donate a:hover,
+#donate a:focus-visible {
+  color: var(--chalk);
+  background: transparent;
+  box-shadow: 3px 3px 0 rgba(248, 247, 239, 0.28);
+  transform: translateY(-2px) rotate(-0.35deg);
+}
+
+#donate a:active {
+  box-shadow: none;
+  transform: translateY(1px);
+}
+
+#faq {
+  max-width: 52rem;
+  padding: 0 0 var(--section-gap);
+}
+
+#faq h2 {
+  margin-bottom: 2rem;
+}
+
+#faq p {
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+#faq p:nth-of-type(odd) {
+  margin-top: 1.5rem;
+  color: var(--accent);
+}
+
+#faq strong {
+  font-weight: 400;
+}
+
+#sponsors {
+  width: min(100% - 3rem, 52rem);
+  margin: 0 auto var(--section-gap);
+  padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+#sponsors p {
+  margin: 1rem 0 0.4rem;
+  color: var(--muted);
+}
+
+#sponsors a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+#footer {
+  padding: 2.5rem 0 3.5rem;
+  border-top: 1px solid var(--line);
+}
+
+#footer h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+#footer p {
+  max-width: 43rem;
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+/* Applied only after JavaScript has loaded, so content is never hidden on its own. */
+body.motion-ready .reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 520ms ease var(--reveal-delay, 0ms),
+    transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+body.motion-ready #products > div.reveal {
+  transform: rotate(var(--tilt)) translateY(1.25rem);
+}
+
+body.motion-ready .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.motion-ready #products > div.reveal.is-visible {
+  transform: rotate(var(--tilt));
+}
+
+body.motion-ready #products > div.reveal.is-visible:hover {
+  transform: rotate(var(--tilt)) translateY(-4px);
+}
+
+@media (max-width: 720px) {
+  #products {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  #pricing th,
+  #pricing td {
+    padding: 0.9rem 0.75rem;
+  }
+
+  #products > div,
+  #products > div:nth-child(2),
+  #products > div:nth-child(3) {
+    min-height: auto;
+    --tilt: 0deg;
+  }
+
+  #products > div:nth-child(2):hover,
+  #products > div:nth-child(3):hover {
+    transform: rotate(var(--tilt)) translateY(-3px);
+  }
+
+  body.motion-ready #products > div.reveal.is-visible:hover {
+    transform: rotate(var(--tilt)) translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  #products > div,
+  #donate a,
+  #hero h1,
+  #hero h3,
+  .reveal {
+    transition: none;
+    animation: none;
+  }
+}
